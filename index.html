@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Result & Grade Calculator</title>
+    <!-- Link to external CSS stylesheet -->
+    <link rel="stylesheet" href="style.css">
+    <!-- Favicon icon -->
+    <link rel="icon" type="image/svg+xml" href="assets/student-icon.svg">
+</head>
+<body>
+
+    <div class="main-container">
+        <!-- Top Bar with Light / Dark Mode Toggle -->
+        <div class="top-bar">
+            <button type="button" id="themeToggleBtn" class="theme-toggle-btn" aria-label="Toggle theme">
+                <img id="themeIcon" src="assets/moon.svg" alt="Theme Icon" class="theme-icon">
+                <span id="themeText">Dark Mode</span>
+            </button>
+        </div>
+
+        <!-- Header Section -->
+        <div class="header">
+            <img src="assets/student-icon.svg" alt="Student Icon" class="logo">
+            <h1>Student Result & Grade Calculator</h1>
+            <p>Enter the student's name and marks for 5 subjects to check their grade and result.</p>
+        </div>
+
+        <!-- Input Form Card -->
+        <div class="card form-card">
+            <!-- Simple Error Message Area -->
+            <div id="errorMessage" class="error-box"></div>
+
+            <form id="calculatorForm">
+                <!-- Student Name Field -->
+                <div class="input-group">
+                    <label for="studentName">Student Name:</label>
+                    <input type="text" id="studentName" placeholder="Enter student name (e.g. John Doe)">
+                </div>
+
+                <!-- Subject 1 Marks -->
+                <div class="input-group">
+                    <label for="subject1">Subject 1 Marks (Max: 100):</label>
+                    <input type="number" id="subject1" placeholder="Enter marks between 0 and 100" min="0" max="100" step="any">
+                </div>
+
+                <!-- Subject 2 Marks -->
+                <div class="input-group">
+                    <label for="subject2">Subject 2 Marks (Max: 100):</label>
+                    <input type="number" id="subject2" placeholder="Enter marks between 0 and 100" min="0" max="100" step="any">
+                </div>
+
+                <!-- Subject 3 Marks -->
+                <div class="input-group">
+                    <label for="subject3">Subject 3 Marks (Max: 100):</label>
+                    <input type="number" id="subject3" placeholder="Enter marks between 0 and 100" min="0" max="100" step="any">
+                </div>
+
+                <!-- Subject 4 Marks -->
+                <div class="input-group">
+                    <label for="subject4">Subject 4 Marks (Max: 100):</label>
+                    <input type="number" id="subject4" placeholder="Enter marks between 0 and 100" min="0" max="100" step="any">
+                </div>
+
+                <!-- Subject 5 Marks -->
+                <div class="input-group">
+                    <label for="subject5">Subject 5 Marks (Max: 100):</label>
+                    <input type="number" id="subject5" placeholder="Enter marks between 0 and 100" min="0" max="100" step="any">
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="button-group">
+                    <button type="button" id="calculateBtn" class="btn btn-calculate">Calculate Result</button>
+                    <button type="button" id="resetBtn" class="btn btn-reset">Reset</button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Result Display Card (Hidden by default, shown upon calculation) -->
+        <div id="resultCard" class="card result-card">
+            <h2>Result Summary</h2>
+            
+            <div class="result-details">
+                <!-- Student Name Row -->
+                <div class="result-row student-name-row">
+                    <span class="label">Student Name:</span>
+                    <span id="displayStudentName" class="value"></span>
+                </div>
+
+                <!-- Subject-Wise Marks Section (Printed on result sheet) -->
+                <div class="subject-breakdown-card">
+                    <h3 class="breakdown-title">Subject-Wise Marks</h3>
+                    <div class="subject-grid">
+                        <div class="subject-item">
+                            <span class="sub-label">Subject 1:</span>
+                            <span id="displaySub1" class="sub-val"></span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="sub-label">Subject 2:</span>
+                            <span id="displaySub2" class="sub-val"></span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="sub-label">Subject 3:</span>
+                            <span id="displaySub3" class="sub-val"></span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="sub-label">Subject 4:</span>
+                            <span id="displaySub4" class="sub-val"></span>
+                        </div>
+                        <div class="subject-item">
+                            <span class="sub-label">Subject 5:</span>
+                            <span id="displaySub5" class="sub-val"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Result Totals and Grades -->
+                <div class="result-row">
+                    <span class="label">Total Marks:</span>
+                    <span id="displayTotalMarks" class="value"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Percentage:</span>
+                    <span id="displayPercentage" class="value"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Average Marks:</span>
+                    <span id="displayAverageMarks" class="value"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Grade:</span>
+                    <span id="displayGrade" class="value grade-badge"></span>
+                </div>
+                <div class="result-row">
+                    <span class="label">Pass / Fail Status:</span>
+                    <span id="displayStatus" class="value status-badge"></span>
+                </div>
+            </div>
+
+            <!-- Feedback Message -->
+            <p id="displayMessage" class="feedback-message"></p>
+
+            <!-- Print Results Button -->
+            <div class="result-actions">
+                <button type="button" id="printBtn" class="btn btn-print">🖨️ Print Results</button>
+            </div>
+        </div>
+
+        <!-- Grading Criteria & Passing Rules Section -->
+        <div class="card rules-card">
+            <h2>Grading Criteria & Passing Rules</h2>
+            
+            <!-- Passing Condition Notice -->
+            <div class="passing-rule-banner">
+                <span class="rule-icon">📌</span>
+                <span class="rule-text"><strong>Passing Condition:</strong> A student must score at least 35 marks in each subject to pass.</span>
+            </div>
+
+            <!-- Grading Table -->
+            <div class="table-responsive">
+                <table class="rules-table">
+                    <thead>
+                        <tr>
+                            <th>Percentage</th>
+                            <th>Grade</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>90–100%</td>
+                            <td><span class="badge badge-aplus">A+</span></td>
+                        </tr>
+                        <tr>
+                            <td>80–89.99%</td>
+                            <td><span class="badge badge-a">A</span></td>
+                        </tr>
+                        <tr>
+                            <td>70–79.99%</td>
+                            <td><span class="badge badge-b">B</span></td>
+                        </tr>
+                        <tr>
+                            <td>60–69.99%</td>
+                            <td><span class="badge badge-c">C</span></td>
+                        </tr>
+                        <tr>
+                            <td>50–59.99%</td>
+                            <td><span class="badge badge-d">D</span></td>
+                        </tr>
+                        <tr>
+                            <td>Below 50%</td>
+                            <td><span class="badge badge-f">F</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- Link to external JavaScript file -->
+    <script src="script.js"></script>
+</body>
+</html>
