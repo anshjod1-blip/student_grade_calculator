@@ -27,16 +27,19 @@ It takes a student's name and marks for 5 subjects, then instantly calculates th
 ## Screenshots
 
 ### 1. Marks Entry Form
-![Marks Entry Form](assets/screenshot-form.png)
+<img width="650" height="743" alt="image" src="https://github.com/user-attachments/assets/613eb17b-dd21-4aa3-baaa-0135df706882" />
+
 
 ### 2. Calculated Result Summary
-![Result Summary](assets/screenshot-result.jpg)
+<img width="640" height="608" alt="image" src="https://github.com/user-attachments/assets/15de78ed-bef2-4eb8-8873-d310ac12368c" />
 
 ### 3. Print Preview (Clean Result Sheet)
-![Print Preview](assets/screenshot-print.jpg)
+<img width="834" height="616" alt="image" src="https://github.com/user-attachments/assets/ef5a33d1-c1b4-4826-b5a6-d561f29a7061" />
+
 
 ### 4. Grading Criteria Table
-![Grading Criteria](assets/screenshot-rules.png)
+<img width="670" height="440" alt="image" src="https://github.com/user-attachments/assets/9970760c-d2fd-4cf2-9e92-f043eba474ea" />
+
 
 ## Tech Stack
 - **HTML5** for structure
